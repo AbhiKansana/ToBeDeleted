@@ -11,12 +11,12 @@ function App() {
   useEffect(()=> {
     axios.get('http://localhost:3000/stats')
     .then(res=> {
-      console.log(res.data)
+      // console.log(res.data)
     })
   },[])
 
   return (
-    <Box>
+    <Box minH={'100vh'} bg={'#778da9'}>
       <MainRoutes />
     </Box>
   );

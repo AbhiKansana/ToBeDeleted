@@ -1,6 +1,9 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import stats from './routes/infoRoute.js'
+import userRouter from './routes/userRoute.js'
+
+
 const app = express()
 const port = 3000
 
@@ -16,7 +19,12 @@ con.on('open',function(){
 })
 app.use(express.json())
 
+// * For Country Data 
 app.use('/stats',stats)
+
+// * For User Signup
+app.use('/user',userRouter)
+
 
 
 app.listen(port, () => {

@@ -53,8 +53,8 @@ const Homepage = () => {
 
   return (
     <>
-      <Box m='auto' maxWidth={'1200px'} position={"relative"}>
-        <Flex justifyContent={'center'} padding="0 1rem" mb="2rem">
+      <Box  minH={'100vh'} m='auto' maxWidth={'1200px'} position={"relative"}>
+        <Flex mt='50px' justifyContent={'center'} padding="0 1rem" >
           <Text fontWeight="700" paddingRight="1rem">
             Sort by country population
           </Text>
