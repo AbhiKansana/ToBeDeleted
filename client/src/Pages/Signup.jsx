@@ -27,8 +27,10 @@ import {
 
     function handleSave(){
         const obj = {name,email,password}
-        axios.post('http://localhost:3000/user',obj)
-        .then(res=>console.log(res))
+        axios.post('http://localhost:3000/user/signup',obj)
+        .then(res=>{
+           console.log("Signed up successfully")
+        })
         .catch(err=>console.log(err))
     }
   

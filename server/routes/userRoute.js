@@ -3,9 +3,9 @@ const router = Router();
 
 import user from '../Models/user.js'
 
-// * Create a User
+// & Create a User
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
     const current = new user({
       name: req.body.name,
       email: req.body.email,
@@ -13,19 +13,39 @@ router.post("/", async (req, res) => {
     });
   
     try {
-      const user1 = await current.save();
-      res.json(user1);
+      const emailCheck = await user.findOne({email: current.email})
+      if(emailCheck===null){
+        const user1 = await current.save();
+        res.status(200).send("Signup successful")
+      }
+      else{
+        res.status(400).send("user already exist")
+      }
 
     } catch {
       console.log(current)
-      res.send("error post");
+      res.status(400).send("error post");
     }
   });
 
+  // & To check for Login
 
-  router.post("/", async (req, res) => {
-     const name = req.body.name
+  router.post("/login", async (req, res) => {
+ 
+     const email = req.body.email
      const password = req.body.password
+     console.log({email,password})
+
+     try{
+
+      const user1 = await user.findOne({email: email, password : password })
+      res.json({ token : user1._id})
+
+     }
+
+     catch{
+       res.status(400).send("login error11")
+     }
      
 
   })

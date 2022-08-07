@@ -13,8 +13,8 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
 import { useState } from 'react';
-
-  import {Link as Link1} from 'react-router-dom'
+import {Link as Link1} from 'react-router-dom'
+import axios from 'axios'
   
   export default function SimpleCard() {
 
@@ -23,7 +23,13 @@ import { useState } from 'react';
 
     function handleClick(){
       const obj = {password,email}
-      console.log(obj)
+      axios.post('http://localhost:3000/user/login',obj)
+      .then(res=>{
+        console.log(res.data)
+      })
+      .catch(err=>{
+        console.log(err.response)
+      })
     }
 
     return (
