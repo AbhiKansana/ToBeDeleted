@@ -23,7 +23,6 @@ router.post("/signup", async (req, res) => {
       }
 
     } catch {
-      console.log(current)
       res.status(400).send("error post");
     }
   });
@@ -34,17 +33,16 @@ router.post("/signup", async (req, res) => {
  
      const email = req.body.email
      const password = req.body.password
-     console.log({email,password})
 
      try{
 
       const user1 = await user.findOne({email: email, password : password })
-      res.json({ token : user1._id})
+      res.json({token:user1._id,name:user1.name})
 
      }
 
      catch{
-       res.status(400).send("login error11")
+       res.status(400).send("login error")
      }
      
 

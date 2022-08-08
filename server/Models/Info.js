@@ -18,6 +18,11 @@ const infoSchema = mongoose.Schema({
         type : Number,
         required : true,
         
+    },
+
+    token :{
+        type : String,
+        required : true
     }
 })
 

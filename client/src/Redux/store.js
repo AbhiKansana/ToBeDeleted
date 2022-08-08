@@ -5,11 +5,13 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk from 'redux-thunk'
 import { mainReducer } from './reducer';
 import { editReducer } from './EditReducer';
+import authReducer from './auth/reducer';
 
 
 const rootReducer = combineReducers({
-    countries : mainReducer,
-    editInfo :editReducer
+    stats : mainReducer,
+    editInfo :editReducer,
+    auth : authReducer
 })
 
 const store = createStore(rootReducer,

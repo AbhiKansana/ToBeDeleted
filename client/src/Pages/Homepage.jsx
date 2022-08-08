@@ -20,31 +20,31 @@ import React, { useEffect } from "react";
 import { mainGetCountriesData, getCountriesSuccess } from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Unit from "../components/Unit";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
-  const state = useSelector((state) => state.countries);
+  const state = useSelector((state) => state.stats);
+  const token = useSelector(state=>state.auth.token)
+  const nav = useNavigate()
+
   const loading = state.isLoading;
   const dispatch = useDispatch();
-  // const [url,setUrl] = useSearchParams()
-  // const valu = url.get("order")
 
-  const arr = state.countries.map((item) => {
+  const arr = state?.countries?.map((item) => {
     return <Unit key={item._id} obj={item} />;
   });
 
   function handleAsc() {
     const arr = state.countries.sort((a, b) => a.population - b.population);
-    // console.log("sort asc",arr)
-    // setUrl({order:"asc"})
+
     dispatch(getCountriesSuccess(arr));
   }
 
   function handleDesc() {
     const arr = state.countries.sort((a, b) => b.population - a.population);
     dispatch(getCountriesSuccess(arr));
-    // setUrl({order:"desc"})
+
   }
 
   useEffect(() => {

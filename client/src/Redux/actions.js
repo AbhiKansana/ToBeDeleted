@@ -22,9 +22,15 @@ function getCountriesFailure(){
 }
 
  export function mainGetCountriesData(){
-    return (dispatch) =>{
+    return (dispatch,getState) =>{
+        const state = getState()
+        const token = state.auth.token
         dispatch(getCountriesRequest())
-        axios.get('http://localhost:3000/stats')
+        axios.get('http://localhost:3000/stats',{
+            params : {
+                token 
+            }
+        })
         .then(res=>{
             // console.log(res.data)
             dispatch(getCountriesSuccess(res.data))

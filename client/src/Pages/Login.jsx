@@ -15,21 +15,38 @@ import {
 import { useState } from 'react';
 import {Link as Link1} from 'react-router-dom'
 import axios from 'axios'
+import { authLogin } from '../Redux/auth/actions';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
   
-  export default function SimpleCard() {
+  export default function LoginCard() {
 
     const[password,setPassword] = useState("")
     const[email,setEmail] = useState("")
 
+    const dispatch = useDispatch()
+    const nav = useNavigate()
+
     function handleClick(){
       const obj = {password,email}
-      axios.post('http://localhost:3000/user/login',obj)
-      .then(res=>{
-        console.log(res.data)
-      })
-      .catch(err=>{
-        console.log(err.response)
-      })
+      if(email && password){
+
+        axios.post('http://localhost:3000/user/login',obj)
+        .then(res=>{        
+          dispatch(authLogin(res.data))
+          localStorage.setItem("Node",JSON.stringify(res.data))
+          alert("Login Successfull")
+          nav('/')
+        })
+        .catch(err=>{
+          alert("wrong credentials")
+        })
+      }
+      else{
+        alert("wrong credintials")
+      }
+
     }
 
     return (

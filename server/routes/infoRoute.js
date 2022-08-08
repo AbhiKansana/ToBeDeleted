@@ -11,7 +11,10 @@ router.post("/", async (req, res) => {
       country: req.body.country,
       city: req.body.city,
       population: req.body.population,
+      token : req.body.token
     });
+
+    // console.log(user.token)
   
     try {
       const a1 = await user.save();
@@ -27,11 +30,13 @@ router.post("/", async (req, res) => {
   // * Get All Todos
 
 router.get("/", async (req, res) => {
+    const userLogged = req.query.token
     try {
-      const aliens = await cinfo.find();
-      res.json(aliens);
+      const aliens2 = await cinfo.find({token : userLogged});
+      res.json(aliens2);
+ 
     } catch {
-      res.send("error");
+      res.status(400).send([]);
     }
   });
   

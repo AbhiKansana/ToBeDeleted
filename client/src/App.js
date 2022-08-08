@@ -16,7 +16,7 @@ function App() {
   },[])
 
   return (
-    <Box minH={'100vh'} bg={'#778da9'}>
+    <Box minH={'100vh'} bg={'#76c893'}>
       <MainRoutes />
     </Box>
   );

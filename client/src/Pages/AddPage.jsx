@@ -2,9 +2,10 @@ import { Box, Button, Container, Heading, Input, Text } from "@chakra-ui/react";
 import React from 'react'
 import { useState } from "react";
 import axios from "axios";
-import { uesNavigate, useNavigate} from 'react-router-dom'
+import {  useNavigate} from 'react-router-dom'
 import { mainGetCountriesData } from "../Redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+ 
 
 
 
@@ -12,6 +13,7 @@ const AddPage = () => {
 
     const nav = useNavigate()
     const dispatch = useDispatch()
+    const token = useSelector(state=>state.auth.token)
 
     const[country,setCountry] = useState("")
     const[capital,setCapital] = useState("")
@@ -19,10 +21,11 @@ const AddPage = () => {
 
     function handleAdd(){
         const city = capital
-        const obj = {country,city,population}
+        const obj = {country,city,population,token}
         // console.log(obj)
         axios.post("http://localhost:3000/stats",obj)
         .then((res)=>{
+               console.log(res.data)
                dispatch(mainGetCountriesData())
                nav('/')
                
